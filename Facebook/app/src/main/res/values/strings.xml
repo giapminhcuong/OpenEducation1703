@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Facebook</string>
+    <string name="app_label">Searchable</string>
+    <string name="search_hint">Search Hint</string>
+</resources>
