@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dp_5"
+                                    android:layout_marginRight="@dimen/dp_5"
+                                    android:layout_marginTop="@dimen/dp_5"
+                                    app:cardCornerRadius="@dimen/dp_5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_5"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_view_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/user"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giap Minh Cuong"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/text_view_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0967962148"/>
+
+            <TextView
+                android:id="@+id/text_view_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goc de, Ha Noi"
+                android:textStyle="italic"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

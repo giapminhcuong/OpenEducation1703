@@ -2,4 +2,9 @@
     <string name="app_name">Facebook</string>
     <string name="app_label">Searchable</string>
     <string name="search_hint">Search Hint</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date">08 thg 10, 2016 Lúc 00:07</string>
+    <string name="people_liked">Bạn, Nguyễn Thành Nam và Hai Pham Viet</string>
 </resources>

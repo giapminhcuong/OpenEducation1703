@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dp_8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_8">
+
+        <!-- Avatar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_8">
+
+            <ImageView
+                android:id="@+id/image_view_avatar"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/ic_launcher"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_view_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:text="Minh Cuong"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+
+                <!-- date and mode -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_view_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date"
+                        android:textSize="@dimen/sp_10"/>
+
+                    <ImageView
+                        android:id="@+id/image_view_mode"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/dp_10"
+                        android:src="@mipmap/ic_launcher"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginRight="@dimen/dp_8"
+                android:text="..."
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Content -->
+        <TextView
+            android:textColor="@android:color/black"
+            android:layout_margin="@dimen/dp_8"
+            android:text="MINH CƯƠNG"
+            android:id="@+id/text_view_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- icon and text people liked -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_8">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/image_view_icon_like"
+                android:src="@mipmap/ic_launcher"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_10"/>
+            <TextView
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_10"
+                android:text="@string/people_liked"
+                android:id="@+id/text_view_people_liked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <View
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

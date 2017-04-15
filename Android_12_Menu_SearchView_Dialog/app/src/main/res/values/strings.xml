@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Android_12_Menu_SearchView_Dialog</string>
+    <string name="Contact">Contacts</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="del">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Hủy bỏ</string>
+</resources>
