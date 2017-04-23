@@ -34,7 +34,10 @@ public class ConfirmDelDialog extends DialogFragment {
         builder.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mContactAdapter.delUser(mPos);
+                Contact contact = mContactAdapter.getContact(mPos);
+                DatabaseHelper databaseHelper = new DatabaseHelper(getContext());
+                if (databaseHelper.deleteContact(contact))
+                    mContactAdapter.delUser(mPos);
                 Toast.makeText(getActivity(), "Delete Item Selected in Context Menu", Toast.LENGTH_SHORT).show();
             }
         });

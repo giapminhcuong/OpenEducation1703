@@ -1,6 +1,7 @@
 package com.cuong.android.android_12_menu_searchview_dialog;
 
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerViewContact;
     ContactAdapter adapter;
     private Button mButtonCheckContextMenu;
+    private DatabaseHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRecyclerViewContact = (RecyclerView) findViewById(R.id.recycler_view_contact);
         mRecyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Contact> contactList = new ArrayList<>();
-        for (int i = 1; i <= 20; i++)
-            contactList.add(new Contact("Giáp Minh Cương " + i, "0967962148", "Gốc đề, Hà nội"));
+        mDatabaseHelper = new DatabaseHelper(this);
+
+        List<Contact> contactList = mDatabaseHelper.getAllContacts();
+
         adapter = new ContactAdapter(contactList, this);
         mRecyclerViewContact.setAdapter(adapter);
 
@@ -67,14 +71,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_menu_add_contact:
-                adapter.addUser(Contact.getRandomContact());
-                mRecyclerViewContact.scrollToPosition(0);
+                openDialogAddContact();
                 Toast.makeText(this, "Menu Add Click", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openDialogAddContact() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View v = getLayoutInflater().inflate(R.layout.dialog_insert_contact, null);
+
+        final EditText mEditTextName = (EditText) v.findViewById(R.id.edit_text_name);
+        final EditText mEditTextPhone = (EditText) v.findViewById(R.id.edit_text_phone);
+        final EditText mEditTextAddress = (EditText) v.findViewById(R.id.edit_text_address);
+
+
+        builder.setTitle("Add");
+        builder.setMessage("Input information");
+        builder.setView(v);
+        builder.setNegativeButton(android.R.string.no, null);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                int id = databaseHelper.getNewId();
+                Contact contact = new Contact(id, mEditTextName.getText().toString(),
+                        mEditTextPhone.getText().toString(),
+                        mEditTextAddress.getText().toString());
+                if (databaseHelper.insertContact(contact)) {
+                    adapter.addUser(contact);
+                    mRecyclerViewContact.scrollToPosition(0);
+                }
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -115,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dialog.show(MainActivity.this.getSupportFragmentManager(), "");
                         break;
                     case R.id.item_menu_edit:
+                        openUpdateContactDialog(pos);
                         Toast.makeText(MainActivity.this, "Edit Item Selected in Context Menu", Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -123,5 +159,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             }
         });
+    }
+
+    private void openUpdateContactDialog(final int pos) {
+        final Contact contact = adapter.getContact(pos);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View v = getLayoutInflater().inflate(R.layout.dialog_insert_contact, null);
+
+        final EditText mEditTextName = (EditText) v.findViewById(R.id.edit_text_name);
+        final EditText mEditTextPhone = (EditText) v.findViewById(R.id.edit_text_phone);
+        final EditText mEditTextAddress = (EditText) v.findViewById(R.id.edit_text_address);
+
+        mEditTextName.setText(contact.getName());
+        mEditTextPhone.setText(contact.getPhone());
+        mEditTextAddress.setText(contact.getAddress());
+
+
+        builder.setTitle("Update");
+        builder.setMessage("Change information");
+        builder.setView(v);
+        builder.setNegativeButton(android.R.string.no, null);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                contact.setName(mEditTextName.getText().toString());
+                contact.setPhone(mEditTextPhone.getText().toString());
+                contact.setAddress(mEditTextAddress.getText().toString());
+                if (databaseHelper.updateContact(contact)) {
+                    adapter.notifyItemChanged(pos);
+                    mRecyclerViewContact.scrollToPosition(pos);
+                }
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Back")
+                .setMessage("Bạn có muốn back không?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MainActivity.super.onBackPressed();
+                    }
+                })
+                .create().show();
     }
 }

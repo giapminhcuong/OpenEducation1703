@@ -52,7 +52,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     public void getFilter(String query) {
         query = query.toLowerCase();
-        Log.d("AAA", "query = " + query);
+//        Log.d("AAA", "query = " + query);
         if (query.isEmpty()) {
             mContactList = mContactListBackup;
             notifyDataSetChanged();
@@ -103,15 +103,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         private TextView mTextViewName;
         private TextView mTextViewPhone;
         private TextView mTextViewAddress;
+        private View mViewMore;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ((MainActivity) mContext).registerForContextMenu(itemView);
-            itemView.setOnClickListener(((MainActivity) mContext));
+            //itemView.setOnClickListener(((MainActivity) mContext));
             mImageViewAvatar = (ImageView) itemView.findViewById(R.id.image_view_avatar);
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name);
             mTextViewAddress = (TextView) itemView.findViewById(R.id.text_view_address);
             mTextViewPhone = (TextView) itemView.findViewById(R.id.text_view_phone);
+            mViewMore = itemView.findViewById(R.id.view_more);
+            mViewMore.setOnClickListener((View.OnClickListener) mContext);
+            mViewMore.setTag(this);
             itemView.setTag(this);
         }
 

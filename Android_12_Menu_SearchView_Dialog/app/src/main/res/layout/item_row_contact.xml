@@ -22,9 +22,10 @@
             android:src="@drawable/user"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -48,5 +49,14 @@
                 android:text="Goc de, Ha Noi"
                 android:textStyle="italic"/>
         </LinearLayout>
+
+        <View
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:id="@+id/view_more"
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_15"
+            android:layout_gravity="top"
+            android:background="@drawable/more"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -6,4 +6,7 @@
     <string name="edit">Edit</string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Hủy bỏ</string>
+    <string name="name">Tên</string>
+    <string name="phone">Số đt</string>
+    <string name="address">Địa chỉ</string>
 </resources>
